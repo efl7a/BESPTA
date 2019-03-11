@@ -16,7 +16,7 @@ class CalendarScreen extends Component {
           items={this.props.events}
           // loadItemsForMonth={this.loadEvents}
           renderItem={this.renderEvent}
-          renderEmptyDate={this.renderEmptyDate}
+          renderEmptyData={this.renderEmptyData}
           rowHasChanged={this.rowHasChanged}
            // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
           //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
@@ -25,8 +25,21 @@ class CalendarScreen extends Component {
     );
   }
 
-    loadEvents = (month) =>  {
-
+    loadEvents = (day) =>  {
+      // setTimeout(() => {
+      // for (let i = -15; i < 85; i++) {
+      //   const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+      //   const strTime = this.timeToString(time);
+      //   if (!this.props.pta[strTime]) {
+      //     this.props.pta[strTime] = [];
+      //     const numItems = Math.floor(Math.random() * 5);
+      //     for (let j = 0; j < numItems; j++) {
+      //       this.props.pta[strTime].push({
+      //         name: 'Item for ' + strTime,
+      //         height: Math.max(50, Math.floor(Math.random() * 150))
+      //       });
+      //     }
+      //   }
     }
 
     renderEvent = (event) => {
@@ -42,7 +55,7 @@ class CalendarScreen extends Component {
       );
     }
 
-    renderEmptyDate = () => {
+    renderEmptyData = () => {
       return (
         <View style={styles.emptyDate}></View>
       );
@@ -51,6 +64,11 @@ class CalendarScreen extends Component {
     rowHasChanged = (r1, r2) => {
       return r1.name !== r2.name;
     }
+
+  //   timeToString = (time) => {
+  //   const date = new Date(time);
+  //   return date.toISOString().split('T')[0];
+  // }
 
   }
 

@@ -39,7 +39,6 @@ export const fetchPTA = () => async (dispatch) => {
       mem.imageURL = member.imageURL
       payload.push(mem)
     });
-    console.log(`fetchpta ${payload}`)
     return dispatch({ type: FETCH_PTA, payload });
   } catch(error) {
     console.log(error);

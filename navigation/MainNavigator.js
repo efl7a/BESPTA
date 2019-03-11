@@ -5,11 +5,17 @@ import CalendarScreen from '../screens/CalendarScreen';
 import PTAScreen from '../screens/PTAScreen';
 import SchoolScreen from '../screens/SchoolScreen';
 import TeacherScreen from '../screens/TeacherScreen';
+import VolunteerScreen from '../screens/VolunteerScreen';
 
 
 export default createAppContainer(createBottomTabNavigator({
       Calendar: CalendarScreen,
-      PTA: PTAScreen,
+      PTA: {
+        screen: createStackNavigator({
+          PTA: PTAScreen,
+          Volunteer: VolunteerScreen
+        })
+      },
       School: {
         screen: createStackNavigator({
           School: SchoolScreen,
