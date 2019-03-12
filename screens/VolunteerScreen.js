@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, ScrollView } from 'react-native';
+import { View, Text, FlatList, ScrollView, Linking } from 'react-native';
 import { Input, Button, CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 class VolunteerScreen extends Component {
   state = {
-    firstName: '',
-    lastName: '',
-    email: '',
+    firstName: "",
+    lastName: "",
+    email: "",
     committees: [],
   }
 
@@ -23,23 +23,35 @@ class VolunteerScreen extends Component {
   }
 
   changeCommittees = (index) => {
-    console.log("change committees", index, this.state.committees[index])
     let committees = [ ...this.state.committees ];
     committees[index].checked = !this.state.committees[index].checked
     this.setState({ committees })
   }
 
   renderCheckboxes = (item, index) => {
-    console.log("checkboxes", item.item, index)
     const { name, checked } = item.item;
 
     return (
       <CheckBox
         title={name}
-        onPress={() => console.log(item.item, index)}
+        onPress={() => this.changeCommittees(item.index)}
         checked={checked}
       />
     )
+  }
+
+  onSubmit = () => {
+    const { firstName, lastName, email, committees, } = this.state;
+
+    const URL = 'mailto:ballantyneptasecretary@gmail.com';
+    const committeeChoices = committees.filter(committee => committee.checked).map(committee => committee.name).join('\n');
+    const subject = "App testing";
+    const body = `Name: ${firstName} ${lastName} \n
+    email: ${email} \n
+    Please sign me up for the following committees: \n
+    ${committeeChoices}`
+    Linking.openURL(`${URL}?subject=${subject}&body=${body}`);
+    this.props.navigation.navigate('PTA')
   }
 
   render() {
@@ -49,17 +61,20 @@ class VolunteerScreen extends Component {
           <Input
             label="First Name"
             value={this.state.firstName}
-            onChange={(firstName) => this.setState( { firstName })}
+            onChangeText={(firstName) => this.setState( { firstName })}
+            autoCorrect={false}
           />
           <Input
             label="Last Name"
             value={this.state.lastName}
-            onChange={(lastName) => this.setState( { lastName })}
+            onChangeText={(lastName) => this.setState( { lastName })}
+            autoCorrect={false}
           />
           <Input
             label="Email"
             value={this.state.email}
-            onChange={(email) => this.setState( { email })}
+            onChangeText={(email) => this.setState( { email })}
+            autoCorrect={false}
           />
         </View>
         <View style={{ flex: 1 }}>
@@ -67,7 +82,7 @@ class VolunteerScreen extends Component {
             <FlatList
               data={this.state.committees}
               renderItem={(item, index) => this.renderCheckboxes(item, index)}
-              keyExtractor={(item, index) => index.toString()}
+              keyExtractor={(item, index) => item.name}
             />
           </ScrollView>
 
@@ -75,7 +90,7 @@ class VolunteerScreen extends Component {
         <View>
           <Button
             title="Submit"
-            onPress={() => console.log('The info being sent:', this.state)}
+            onPress={this.onSubmit}
           />
         </View>
       </View>
