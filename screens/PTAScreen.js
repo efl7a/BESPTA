@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Linking } from 'react-native';
+import { Text, View, ActivityIndicator, ScrollView, Linking } from 'react-native';
 import { Image, Card, Button, Divider } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -80,6 +80,11 @@ class PTAScreen extends Component {
     return (
       <ScrollView style={{ marginTop: 15}}>
         {this.renderCards()}
+        <Button
+          title="Further Information"
+          onPress={() => Linking.openURL('https://ballantynepta.weebly.com/')}
+          buttonStyle={styles.buttonStyle}
+        />
       </ScrollView>
     );
   }
