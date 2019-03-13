@@ -5,10 +5,11 @@ import {
   Linking,
   SectionList,
   ScrollView,
-  Platform
+  Platform,
+  ActivityIndicator
    } from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Card, ListItem } from 'react-native-elements';
+import { Button, Card, ListItem, Divider } from 'react-native-elements';
 
 import { fetchSchool, fetchTeachers } from '../actions';
 
@@ -31,6 +32,34 @@ class SchoolScreen extends Component {
     this.props.fetchTeachers();
   }
 
+  renderSchoolScreen = () => {
+    return (
+      <ScrollView>
+        <Card
+          title="School Administration"
+        >
+          {this.renderAdmin()}
+        </Card>
+        <Card
+          title="Helpful Links"
+        >
+          {this.renderLinks()}
+        </Card>
+
+        <Card
+          title="Helpful Apps"
+        >
+          {this.renderApps()}
+        </Card>
+        <Card
+          title="Teachers"
+        >
+          {this.renderTeachers()}
+        </Card>
+      </ScrollView>
+    )
+  }
+
   renderAdmin = () => {
     return this.props.schoolData.admin.map(admin => {
       return (
@@ -46,20 +75,24 @@ class SchoolScreen extends Component {
     })
   }
 
-  renderSchoolData = () => {
+  renderLinks = () => {
     return (
-      <View><Text>Some sorta list</Text></View>
-    );
-  }
-
-  renderTeachers = () => {
-    return (
-      <View><Text>Some sorta list</Text></View>
+      this.props.schoolData.links.map(link => {
+        return (
+          <View>
+            <ListItem
+            key={link.name}
+            title={link.name}
+            onPress={() => Linking.openURL(link.link)}
+            />
+            <Divider />
+          </View>
+        )
+      })
     );
   }
 
   renderApps = () => {
-    console.log("renderapps", this.props.schoolData)
     let platform = Platform.OS
     return (
       this.props.schoolData.apps.map(app => {
@@ -75,30 +108,47 @@ class SchoolScreen extends Component {
     );
   }
 
+  renderTeachers = () => {
+    let grades = ["Kindergarten", "1st Grade", "2nd Grade", "3rd Grade", "4th Grade", "5th Grade"]
+    grades = grades.map((grade, index) => {
+      return {
+        title: grade,
+        data: this.props.teachers.filter(teacher => teacher.grade == index)
+      }
+    })
+    return (
+      <SectionList
+        renderItem={({item, index, section}) => this.renderTeacher({item})}
+        renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
+        sections={grades}
+        keyExtractor={(item, index) => item + index}
+      />
+    )
+  }
+
+  renderTeacher = ({ item }) => {
+    return (
+      <View>
+        <Text>{item.firstName}</Text>
+        <Text>{item.lastName}</Text>
+        <Button
+          title="Email"
+          onPress={() => console.log(item.email)}
+        />
+      </View>
+    );
+  }
+
   render() {
-    return(
-      <ScrollView>
-        <Card
-          title="School Administration"
-        >
-          {this.renderAdmin()}
-        </Card>
-
-        {this.renderSchoolData()}
-
-        {this.renderTeachers()}
-        <Card
-          title="Helpful Apps"
-        >
-          {this.renderApps()}
-        </Card>
-      </ScrollView>
+    return (
+      <View>
+        {this.props.schoolData.admin ? this.renderSchoolScreen() : <ActivityIndicator /> }
+      </View>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.school, state.teachers)
   return {
     schoolData: state.school,
     teachers: state.teachers
