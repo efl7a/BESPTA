@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, ActivityIndicator, ScrollView, Linking } from 'react-native';
-import { Image, Card, Button, Divider } from 'react-native-elements';
+import { Image, Card, Button, Divider, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { fetchPTA } from '../actions';
@@ -10,6 +10,7 @@ const LogoURL = "https://ballantynepta.weebly.com/uploads/8/8/2/6/88262164/dabea
 class PTAScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
+      title: 'BES PTA',
       headerRight: (
         <Button
           title="Volunteer"
@@ -78,7 +79,11 @@ class PTAScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={{ marginTop: 15}}>
+      <ScrollView style={{ marginTop: 5}}>
+        <Image
+          source={{ uri: LogoURL}}
+          style={styles.logoImageStyle}
+        />
         {this.renderCards()}
         <Button
           title="Further Information"
@@ -117,6 +122,12 @@ const styles = {
     height: 150,
     alignSelf: 'center',
     marginBottom: 5
+  },
+  logoImageStyle: {
+    width: 90,
+    height: 90,
+    alignSelf: 'center',
+    marginTop: 10
   }
 };
 

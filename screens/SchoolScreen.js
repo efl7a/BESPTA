@@ -18,6 +18,9 @@ import {
 } from 'react-native-elements';
 
 import { fetchSchool, fetchTeachers } from '../actions';
+import { AdminList } from '../components/AdminList';
+import { LinksList } from '../components/LinksList';
+import { AppsList } from '../components/AppsList';
 
 class SchoolScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -39,120 +42,40 @@ class SchoolScreen extends Component {
   }
 
   renderSchoolScreen = () => {
+    let platform = Platform.OS
+    const { logo, admin, links, apps } = this.props.schoolData;
     return (
       <ScrollView>
+
         <Image
           source={{ uri: this.props.schoolData.logo.link}}
           style={styles.imageStyle}
         />
+
         <Card
           title="School Administration"
         >
-          {this.renderAdmin()}
+          <AdminList data={this.props.schoolData.admin} />
+
         </Card>
+
         <Card
           title="Helpful Links"
         >
-          {this.renderLinks()}
+          <LinksList data={this.props.schoolData.links} />
         </Card>
 
         <Card
           title="Helpful Apps"
         >
-          {this.renderApps()}
+          <AppsList data={this.props.schoolData.apps} platform={platform} />
         </Card>
-        <Card
-          title="Teachers"
-        >
-          {this.renderTeachers()}
-        </Card>
+
       </ScrollView>
     )
   }
 
-  renderAdmin = () => {
-    return this.props.schoolData.admin.map(admin => {
-      return (
-        <View key={admin.title}>
-          <ListItem
-            key={admin.title}
-            title={admin.name}
-            subtitle={admin.title}
-            onPress={() => Linking.openURL(`mailto:${admin.email}`)}
-          />
-          <Divider />
-        </View>
-      )
-    })
-  }
-
-  renderLinks = () => {
-    return (
-      this.props.schoolData.links.map(link => {
-        return (
-          <View key={link.name}>
-            <ListItem
-            key={link.name}
-            title={link.name}
-            onPress={() => Linking.openURL(link.link)}
-            />
-            <Divider />
-          </View>
-        )
-      })
-    );
-  }
-
-  renderApps = () => {
-    let platform = Platform.OS
-    return (
-      this.props.schoolData.apps.map(app => {
-        const URL = platform === 'ios' ? app.ios : app.android
-        return (
-          <View>
-            <ListItem
-            key={app.name}
-            title={app.name}
-            onPress={() => Linking.openURL(URL)}
-            />
-            <Divider />
-          </View>
-        )
-      })
-    );
-  }
-
-  renderTeachers = () => {
-    let grades = ["Kindergarten", "1st Grade", "2nd Grade", "3rd Grade", "4th Grade", "5th Grade"]
-    grades = grades.map((grade, index) => {
-      return {
-        title: grade,
-        data: this.props.teachers.filter(teacher => teacher.grade == index)
-      }
-    })
-    return (
-      <SectionList
-        renderItem={({item, index, section}) => this.renderTeacher({item})}
-        renderSectionHeader={({section: {title}}) => <Text>{title}</Text>}
-        sections={grades}
-        keyExtractor={(item, index) => item + index}
-      />
-    )
-  }
-
-  renderTeacher = ({ item }) => {
-    return (
-      <View>
-        <Text>{item.firstName}</Text>
-        <Text>{item.lastName}</Text>
-        <Button
-          title="Email"
-          onPress={() => console.log(item.email)}
-        />
-      </View>
-    );
-  }
-
+  
   render() {
     return (
       <View>
