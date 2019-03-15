@@ -11,7 +11,7 @@ const AdminList = ({ data }) => {
           title={item.name}
           subtitle={item.title}
           onPress={() => Linking.openURL(`mailto:${item.email}`)}
-          rightIcon={{ icon: <Icon name="email" />}}
+          rightIcon={{ name: "email", color: "#1b2668" }}
         />
         <Divider />
       </View>

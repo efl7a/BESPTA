@@ -6,7 +6,7 @@ const AppsList = ({ data, platform }) => {
   return data.map(item => {
     const URL = platform === 'ios' ? item.ios : item.android
     return (
-      <View>
+      <View key={item.name}>
         <ListItem
         key={item.name}
         title={item.name}

@@ -11,16 +11,17 @@ import {
    } from 'react-native';
 import { connect } from 'react-redux';
 import {
-  Button,
-  Card,
   ListItem,
-  Divider
+  Divider,
+  Button
 } from 'react-native-elements';
 
 import { fetchSchool, fetchTeachers } from '../actions';
 import { AdminList } from '../components/AdminList';
 import { LinksList } from '../components/LinksList';
 import { AppsList } from '../components/AppsList';
+import TeachersList from '../components/TeachersList';
+import { BESCard, BESButton } from '../components/common';
 
 class SchoolScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -52,30 +53,38 @@ class SchoolScreen extends Component {
           style={styles.imageStyle}
         />
 
-        <Card
+        <BESCard
           title="School Administration"
         >
           <AdminList data={this.props.schoolData.admin} />
 
-        </Card>
+        </BESCard>
 
-        <Card
+        <BESCard
           title="Helpful Links"
         >
           <LinksList data={this.props.schoolData.links} />
-        </Card>
+        </BESCard>
 
-        <Card
+        <BESCard
           title="Helpful Apps"
         >
           <AppsList data={this.props.schoolData.apps} platform={platform} />
-        </Card>
+        </BESCard>
+
+        <View style={styles.buttonContainer}>
+          <BESButton
+            title="Further Information"
+            onPress={() => Linking.openURL(this.props.schoolData.links.find(link => link.name === "BES Website").link)}
+          />
+        </View>
+
 
       </ScrollView>
     )
   }
 
-  
+
   render() {
     return (
       <View>
@@ -91,6 +100,11 @@ const styles = {
     height: 92,
     alignSelf: 'center',
     marginTop: 10
+  },
+  buttonContainer: {
+    padding: 10,
+    marginRight: 25,
+    marginLeft: 25
   }
 }
 

@@ -4,6 +4,7 @@ import { Image, Card, Button, Divider, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { fetchPTA } from '../actions';
+import { BESButton } from '../components/common';
 
 const LogoURL = "https://ballantynepta.weebly.com/uploads/8/8/2/6/88262164/dabears_6.png"
 
@@ -44,10 +45,9 @@ class PTAScreen extends Component {
               </View>
               <View style={styles.cardView}>
                 {member.title === "President" ? null : this.renderCommittees(member)}
-                <Button
+                <BESButton
                   title="Email"
                   onPress={() => this.emailMember(member.email)}
-                  buttonStyle={styles.buttonStyle}
                 />
               </View>
             </Card>
@@ -85,11 +85,12 @@ class PTAScreen extends Component {
           style={styles.logoImageStyle}
         />
         {this.renderCards()}
-        <Button
-          title="Further Information"
-          onPress={() => Linking.openURL('https://ballantynepta.weebly.com/')}
-          buttonStyle={styles.buttonStyle}
-        />
+        <View style={styles.buttonContainer}>
+          <BESButton
+            title="Further Information"
+            onPress={() => Linking.openURL('https://ballantynepta.weebly.com/')}
+          />
+        </View>
       </ScrollView>
     );
   }
@@ -114,9 +115,6 @@ const styles = {
   dividerStyle: {
     marginBottom: 5
   },
-  buttonStyle: {
-    marginTop: 5
-  },
   imageStyle: {
     width: 150,
     height: 150,
@@ -128,6 +126,11 @@ const styles = {
     height: 90,
     alignSelf: 'center',
     marginTop: 10
+  },
+  buttonContainer: {
+    padding: 10,
+    marginRight: 25,
+    marginLeft: 25
   }
 };
 

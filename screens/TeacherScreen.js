@@ -1,72 +1,28 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+
+import { fetchTeachers } from '../actions';
+import TeachersList from '../components/TeachersList';
+import { BESCard } from '../components/common/BESCard';
 
 class TeacherScreen extends Component {
 
-  renderGrades = () => {
-    let grades = ["Kindergarten", "1st Grade", "2nd Grade", "3rd Grade", "4th Grade", "5th Grade", "Specials"]
-    grades = grades.map((grade, index) => {
-      return {
-        title: grade,
-        data: this.props.teachers.filter(teacher => teacher.grade == index)
-      }
-    })
-    return (
-      grades.map((grade, index) => {
-        return (
-          <View>
-            <ListItem
-            key={grade.title}
-            title={grade.title}
-            onPress={() => this.renderTeachers()}
-            />
-            <Divider />
-          </View>
-        )
-      })
-    )
-  }
-
-  renderTeachers = (teachers) => {
-    console.log("teachers", teachers)
-    return (
-      teachers.map(teacher => {
-        <View>
-          <ListItem
-          key={teacher.lastName}
-          title={teacher.firstName + ' ' + teacher.lastName}
-          onPress={() => Linking.openURL(`mailto:${teacher.email}`)}
-          />
-          <Divider />
-        </View>
-      })
-    );
-  }
-
   render() {
     return(
-      <View>
-        <Text>
-          TeacherScreen
-        </Text>
-        <Text>
-          TeacherScreen
-        </Text>
-        <Text>
-          TeacherScreen
-        </Text>
-        <Text>
-          TeacherScreen
-        </Text>
-        <Text>
-          TeacherScreen
-        </Text>
-        <Text>
-          TeacherScreen
-        </Text>
-      </View>
+      <ScrollView>
+        <BESCard
+          title="BES Teachers"
+        >
+          <TeachersList data={this.props.teachers} />
+        </BESCard>
+      </ScrollView>
     )
   }
 }
 
-export default TeacherScreen;
+const mapStateToProps = ({ teachers }) => {
+  return { teachers }
+}
+
+export default connect(mapStateToProps, { fetchTeachers })(TeacherScreen);

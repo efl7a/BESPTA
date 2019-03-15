@@ -2,10 +2,24 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { connect } from 'react-redux';
+import { Icon } from 'react-native-elements'
 
 import { fetchEvents } from '../actions';
 
 class CalendarScreen extends Component {
+  static navigationOptions = {
+    title: 'Calendar',
+    tabBarIcon: ({ tintColor }) => {
+      return (
+        <Icon
+          name="calendar"
+          size={30}
+          color={tintColor}
+        />
+      )
+    }
+  }
+
   componentDidMount() {
     this.props.fetchEvents();
   }
