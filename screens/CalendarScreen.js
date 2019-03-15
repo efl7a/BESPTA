@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -38,20 +38,7 @@ class CalendarScreen extends Component {
   }
 
     loadEvents = (day) =>  {
-      // setTimeout(() => {
-      // for (let i = -15; i < 85; i++) {
-      //   const time = day.timestamp + i * 24 * 60 * 60 * 1000;
-      //   const strTime = this.timeToString(time);
-      //   if (!this.props.pta[strTime]) {
-      //     this.props.pta[strTime] = [];
-      //     const numItems = Math.floor(Math.random() * 5);
-      //     for (let j = 0; j < numItems; j++) {
-      //       this.props.pta[strTime].push({
-      //         name: 'Item for ' + strTime,
-      //         height: Math.max(50, Math.floor(Math.random() * 150))
-      //       });
-      //     }
-      //   }
+
     }
 
     renderEvent = (event) => {
