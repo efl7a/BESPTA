@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -43,14 +43,17 @@ class CalendarScreen extends Component {
 
     renderEvent = (event) => {
       return (
-        <View style={[styles.event, {height: event.height}]}>
+        <TouchableOpacity
+          style={[styles.event, {height: event.height}]}
+          onPress={() => event.link ? Linking.openURL(event.link) : null}
+        >
           <Text style={styles.eventText}>
             {event.name}
           </Text>
           <Text style={styles.eventText}>
             {event.time}
           </Text>
-        </View>
+        </TouchableOpacity>
       );
     }
 
