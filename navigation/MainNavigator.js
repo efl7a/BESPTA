@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
 import CalendarScreen from '../screens/CalendarScreen';
 import PTAScreen from '../screens/PTAScreen';
@@ -14,13 +15,33 @@ export default createAppContainer(createBottomTabNavigator({
         screen: createStackNavigator({
           PTA: PTAScreen,
           Volunteer: VolunteerScreen
-        })
+        }),
+        navigationOptions: {
+          tabBarIcon: ({tintColor}) => {
+            return <Icon
+              type="entypo"
+              name="baidu"
+              size={30}
+              color={tintColor}
+            />
+          }
+        }
       },
       School: {
         screen: createStackNavigator({
           School: SchoolScreen,
           Teachers: TeacherScreen
-        })
+        }),
+        navigationOptions: {
+          tabBarIcon: ({tintColor}) => {
+            return <Icon
+              type="entypo"
+              name="graduation-cap"
+              size={30}
+              color={tintColor}
+            />
+          }
+        }
       }
 
     }));

@@ -79,6 +79,13 @@ class SchoolScreen extends Component {
           />
         </View>
 
+        <View style={styles.buttonContainer}>
+          <BESButton
+            title="BES on Facebook"
+            onPress={() => Linking.openURL('https://www.facebook.com/BEARTEAM2018/')}
+            icon={{ name: "facebook", type: "entypo" }}
+          />
+        </View>
 
       </ScrollView>
     )

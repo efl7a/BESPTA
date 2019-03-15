@@ -11,10 +11,10 @@ const LogoURL = "https://ballantynepta.weebly.com/uploads/8/8/2/6/88262164/dabea
 class PTAScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'BES PTA',
       headerRight: (
         <Button
           title="Volunteer"
+          titleStyle={styles.topBarButtonTitle}
           onPress={() => navigation.navigate('Volunteer')}
           type="clear"
         />
@@ -48,6 +48,7 @@ class PTAScreen extends Component {
                 <BESButton
                   title="Email"
                   onPress={() => this.emailMember(member.email)}
+                  icon={{ name: "email", type: "material" }}
                 />
               </View>
             </Card>
@@ -91,6 +92,13 @@ class PTAScreen extends Component {
             onPress={() => Linking.openURL('https://ballantynepta.weebly.com/')}
           />
         </View>
+        <View style={styles.buttonContainer}>
+          <BESButton
+            title="BES PTA on Facebook"
+            onPress={() => Linking.openURL('https://www.facebook.com/BallantynePTA/')}
+            icon={{ name: "facebook", type: "entypo" }}
+          />
+        </View>
       </ScrollView>
     );
   }
@@ -131,6 +139,11 @@ const styles = {
     padding: 10,
     marginRight: 25,
     marginLeft: 25
+  },
+  topBarButtonTitle: {
+    color: "#09337B",
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 };
 
