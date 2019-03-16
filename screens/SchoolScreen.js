@@ -26,7 +26,6 @@ import { BESCard, BESButton } from '../components/common';
 class SchoolScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Ballantyne Elementary',
       headerRight: (
         <Button
           title="Teachers"
