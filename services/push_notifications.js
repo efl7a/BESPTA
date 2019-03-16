@@ -4,7 +4,6 @@ import firebase from 'firebase';
 
 export default async () => {
   let previousToken = await AsyncStorage.getItem('BESToken');
-  console.log("previous", previousToken);
   if (previousToken) {
     return;
   } else {

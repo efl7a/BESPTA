@@ -30,6 +30,7 @@ class SchoolScreen extends Component {
       headerRight: (
         <Button
           title="Teachers"
+          titleStyle={styles.topBarButtonTitle}
           onPress={() => navigation.navigate('Teachers')}
           type="clear"
         />
@@ -112,6 +113,11 @@ const styles = {
     padding: 10,
     marginRight: 25,
     marginLeft: 25
+  },
+  topBarButtonTitle: {
+    color: "#09337B",
+    fontSize: 20,
+    fontWeight: 'bold'
   }
 }
 

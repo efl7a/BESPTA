@@ -16,6 +16,9 @@ class CalendarScreen extends Component {
         size={30}
         color={tintColor}
       />
+    },
+    tabBarOptions: {
+      activeTintColor: '#09337B'
     }
   }
   componentDidMount() {
@@ -30,7 +33,13 @@ class CalendarScreen extends Component {
           renderItem={this.renderEvent}
           renderEmptyData={this.renderEmptyData}
           rowHasChanged={this.rowHasChanged}
-           // theme={{calendarBackground: 'red', agendaKnobColor: 'green'}}
+          theme={{
+            agendaKnobColor: "#09337B",
+            selectedDayBackgroundColor: "#09337B",
+            dotColor: "#09337B",
+            todayTextColor: "#09337B",
+            monthTextColor: "#09337B"
+          }}
           //renderDay={(day, item) => (<Text>{day ? day.day: 'item'}</Text>)}
         />
       </View>
@@ -42,17 +51,28 @@ class CalendarScreen extends Component {
     }
 
     renderEvent = (event) => {
+      const link = event.link ? true : false;
       return (
         <TouchableOpacity
           style={[styles.event, {height: event.height}]}
-          onPress={() => event.link ? Linking.openURL(event.link) : null}
+          onPress={() => link ? Linking.openURL(event.link) : null}
         >
-          <Text style={styles.eventText}>
-            {event.name}
-          </Text>
-          <Text style={styles.eventText}>
-            {event.time}
-          </Text>
+          <View style={styles.eventContainer}>
+            <View>
+              <Text style={styles.eventText}>
+                {event.name}
+              </Text>
+              <Text style={styles.eventText}>
+                {event.time}
+              </Text>
+            </View>
+            <View style={{ alignItem: 'right', justifyContent: 'center'}}>
+              {link ? <Icon name="chevron-right" type="evilicon" size={35} /> : null}
+            </View>
+          </View>
+
+
+
         </TouchableOpacity>
       );
     }
@@ -94,7 +114,12 @@ class CalendarScreen extends Component {
       height: 15,
       flex: 1,
       paddingTop: 30
+    },
+    eventContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between'
     }
+
   });
 
   const mapStateToProps = (state) => {

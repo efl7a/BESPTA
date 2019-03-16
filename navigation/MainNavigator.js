@@ -24,6 +24,9 @@ export default createAppContainer(createBottomTabNavigator({
               size={30}
               color={tintColor}
             />
+          },
+          tabBarOptions: {
+            activeTintColor: '#09337B'
           }
         }
       },
@@ -40,6 +43,9 @@ export default createAppContainer(createBottomTabNavigator({
               size={30}
               color={tintColor}
             />
+          },
+          tabBarOptions: {
+            activeTintColor: '#09337B'
           }
         }
       }
