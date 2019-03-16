@@ -7,10 +7,26 @@ import PTAScreen from '../screens/PTAScreen';
 import SchoolScreen from '../screens/SchoolScreen';
 import TeacherScreen from '../screens/TeacherScreen';
 import VolunteerScreen from '../screens/VolunteerScreen';
+import CalendarInfoScreen from '../screens/CalendarInfoScreen';
 
 
 export default createAppContainer(createBottomTabNavigator({
-      Calendar: CalendarScreen,
+      Calendar: {
+        screen: createStackNavigator({
+          Calendar: CalendarScreen,
+          MoreInfo: CalendarInfoScreen
+        }),
+        navigationOptions: {
+          tabBarIcon: ({tintColor}) => {
+            return <Icon
+              type="font-awesome"
+              name="calendar"
+              size={30}
+              color={tintColor}
+            />
+          }
+        }
+      },
       PTA: {
         screen: createStackNavigator({
           PTA: PTAScreen,
