@@ -69,10 +69,9 @@ class CalendarScreen extends Component {
               {link ? <Icon name="chevron-right" type="evilicon" size={35} /> : null}
             </View>
           </View>
-
-
-
         </TouchableOpacity>
+
+
       );
     }
 
