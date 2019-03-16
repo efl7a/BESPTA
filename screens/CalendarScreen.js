@@ -2,25 +2,24 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
+import { Icon, Button } from 'react-native-elements';
 
 import { fetchEvents } from '../actions';
 
 class CalendarScreen extends Component {
-  static navigationOptions = {
-    title: 'Calendar',
-    tabBarIcon: ({tintColor}) => {
-      return <Icon
-        type="font-awesome"
-        name="calendar"
-        size={30}
-        color={tintColor}
-      />
-    },
-    tabBarOptions: {
-      activeTintColor: '#09337B'
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: (
+        <Button
+          title="More Info"
+          titleStyle={styles.topBarButtonTitle}
+          onPress={() => navigation.navigate('MoreInfo')}
+          type="clear"
+        />
+      )
     }
   }
+
   componentDidMount() {
     this.props.fetchEvents();
   }
@@ -118,8 +117,12 @@ class CalendarScreen extends Component {
     eventContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between'
+    },
+    topBarButtonTitle: {
+      color: "#09337B",
+      fontSize: 20,
+      fontWeight: 'bold'
     }
-
   });
 
   const mapStateToProps = (state) => {
