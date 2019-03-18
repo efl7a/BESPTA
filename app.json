@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "BES Calendar",
-    "slug": "BESCalendar",
-    "privacy": "public",
+    "name": "BES PTA",
+    "slug": "BESPTA",
+    "privacy": "unlisted",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
@@ -24,10 +24,12 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "icon": "./assets/Assets.xcassets/AppIcon.appiconset/1024.png"
+      "icon": "./assets/Assets.xcassets/AppIcon.appiconset/1024.png",
+      "bundleIdentifier": "com.heatherchristman.BESPTA"
     },
     "android": {
-      "icon": "./assets/android/mipmap-xxxhdpi/ic_launcher.png"
+      "icon": "./assets/android/mipmap-xxxhdpi/ic_launcher.png",
+      "package": "com.heatherchristman.BESPTA"
     }
   }
 }
