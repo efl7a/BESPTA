@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Icon, Button } from 'react-native-elements';
 
 import { fetchEvents } from '../actions';
+import { BESButton } from '../components/common/BESButton';
 
 class CalendarScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -52,24 +53,45 @@ class CalendarScreen extends Component {
     renderEvent = (event) => {
       const link = event.link ? true : false;
       return (
-        <TouchableOpacity
-          style={[styles.event, {height: event.height}]}
-          onPress={() => link ? Linking.openURL(event.link) : null}
-        >
-          <View style={styles.eventContainer}>
+        <View style={[styles.event, {height: event.height}]}>
+          <View>
+
             <View>
               <Text style={styles.eventText}>
                 {event.name}
               </Text>
+            </View>
+            <View>
               <Text style={styles.eventText}>
                 {event.time}
               </Text>
             </View>
-            <View style={{ alignItem: 'right', justifyContent: 'center'}}>
-              {link ? <Icon name="chevron-right" type="evilicon" size={35} /> : null}
-            </View>
+
           </View>
-        </TouchableOpacity>
+          <View style={{ alignItem: 'right', justifyContent: 'center'}}>
+            {link ? <BESButton icon={{ name: "chevron-right", type: "evilicon" }} title="More Information " onPress={() => Linking.openURL(event.link)} /> : null}
+          </View>
+        </View>
+
+        //
+        // {/* <TouchableOpacity
+        //   style={[styles.event, {height: event.height}]}
+        //   onPress={() => link ? Linking.openURL(event.link) : null}
+        // >
+        //   <View style={styles.eventContainer}>
+        //     <View>
+        //       <Text style={styles.eventText}>
+        //         {event.name}
+        //       </Text>
+        //       <Text style={styles.eventText}>
+        //         {event.time}
+        //       </Text>
+        //     </View>
+        //     <View style={{ alignItem: 'right', justifyContent: 'center'}}>
+        //       {link ? <Icon name="chevron-right" type="evilicon" size={35} /> : null}
+        //     </View>
+        //   </View>
+        // </TouchableOpacity> */}
 
 
       );
@@ -115,7 +137,7 @@ class CalendarScreen extends Component {
     },
     eventContainer: {
       flexDirection: 'row',
-      justifyContent: 'space-between'
+      justifyContent: 'space-around'
     },
     topBarButtonTitle: {
       color: "#09337B",

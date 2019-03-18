@@ -3,12 +3,8 @@ import { View, Text } from 'react-native';
 
 export default () => {
   return (
-    <View>
-      <Text>Info</Text>
-      <Text>Info</Text>
-      <Text>Info</Text>
-      <Text>Info</Text>
-      <Text>Info</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItem: 'center'}}>
+      <Text>Please Check Back for the Specials Calendar</Text>
     </View>
   );
 };

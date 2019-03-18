@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
@@ -13,8 +14,18 @@ import CalendarInfoScreen from '../screens/CalendarInfoScreen';
 export default createAppContainer(createBottomTabNavigator({
       Calendar: {
         screen: createStackNavigator({
-          Calendar: CalendarScreen,
-          MoreInfo: CalendarInfoScreen
+          Calendar: {
+            screen: CalendarScreen,
+            navigationOptions: {
+              headerTintColor: '#09337B'
+            }
+          },
+          MoreInfo: {
+            screen: CalendarInfoScreen,
+            navigationOptions: {
+              headerTintColor: '#09337B'
+            }
+          }
         }),
         navigationOptions: {
           tabBarIcon: ({tintColor}) => {
@@ -33,7 +44,12 @@ export default createAppContainer(createBottomTabNavigator({
       PTA: {
         screen: createStackNavigator({
           PTA: PTAScreen,
-          Volunteer: VolunteerScreen
+          Volunteer: {
+            screen: VolunteerScreen,
+            navigationOptions: {
+              headerTintColor: '#09337B'
+            }
+          }
         }),
         navigationOptions: {
           tabBarIcon: ({tintColor}) => {
@@ -52,7 +68,12 @@ export default createAppContainer(createBottomTabNavigator({
       School: {
         screen: createStackNavigator({
           School: SchoolScreen,
-          Teachers: TeacherScreen
+          Teachers: {
+            screen: TeacherScreen,
+            navigationOptions: {
+              headerTintColor: '#09337B'
+            }
+          }
         }),
         navigationOptions: {
           tabBarIcon: ({tintColor}) => {
