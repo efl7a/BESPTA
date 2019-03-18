@@ -9,6 +9,7 @@ import SchoolScreen from '../screens/SchoolScreen';
 import TeacherScreen from '../screens/TeacherScreen';
 import VolunteerScreen from '../screens/VolunteerScreen';
 import CalendarInfoScreen from '../screens/CalendarInfoScreen';
+import BearBlastScreen from '../screens/BearBlastScreen';
 
 
 export default createAppContainer(createBottomTabNavigator({
@@ -32,6 +33,22 @@ export default createAppContainer(createBottomTabNavigator({
             return <Icon
               type="font-awesome"
               name="calendar"
+              size={30}
+              color={tintColor}
+            />
+          },
+          tabBarOptions: {
+            activeTintColor: '#09337B'
+          }
+        }
+      },
+      BearBlast: {
+        screen: BearBlastScreen,
+        navigationOptions: {
+          tabBarIcon: ({tintColor}) => {
+            return <Icon
+              type="entypo"
+              name="news"
               size={30}
               color={tintColor}
             />
