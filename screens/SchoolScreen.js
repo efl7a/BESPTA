@@ -39,7 +39,6 @@ class SchoolScreen extends Component {
 
   componentDidMount = () => {
     this.props.fetchSchool();
-    this.props.fetchTeachers();
   }
 
   renderSchoolScreen = () => {

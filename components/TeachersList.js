@@ -26,11 +26,9 @@ export default class TeachersList extends Component {
   };
 
   toggleActiveGrades = (index) => {
-    console.log("begin toggle", this.state.activeGrades[index].expanded)
     let active = [ ...this.state.activeGrades ]
     active[index].expanded = !active[index].expanded
     this.setState({ activeGrades: active })
-    console.log("is toggled", this.state.activeGrades[index].expanded)
   }
 
   renderGrades = () => {
@@ -60,9 +58,9 @@ export default class TeachersList extends Component {
 
 renderTeachers = (data) => {
   return data.map(item => {
-    let name = `${item.firstName} ${item.lastName}`
+    let name = `${item["first name"]} ${item["last name"]}`
     return (
-      <View key={item.lastName} style={styles.expandedContainer} >
+      <View key={name} style={styles.expandedContainer} >
         <Divider />
         <ListItem
           key={name}

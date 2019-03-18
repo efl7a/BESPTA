@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { fetchPTA } from '../actions';
 import { BESButton } from '../components/common';
 
-const LogoURL = "https://ballantynepta.weebly.com/uploads/8/8/2/6/88262164/dabears_6.png"
+// const LogoURL = "https://ballantynepta.weebly.com/uploads/8/8/2/6/88262164/dabears_6.png"
 
 class PTAScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -22,13 +22,15 @@ class PTAScreen extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.fetchPTA();
+  async componentDidMount() {
+    if(!this.props.pta.board) {
+      await this.props.fetchPTA();
+    }
   }
 
   renderCards = () => {
-    if(this.props.pta) {
-      return this.props.pta.map((member, i) => {
+    if(this.props.pta.board) {
+      return this.props.pta.board.map((member, i) => {
         return (
           <View key={i} style={styles.cardView}>
             <Card
@@ -38,6 +40,7 @@ class PTAScreen extends Component {
                 <Image
                   source={{ uri: member.imageURL}}
                   style={styles.imageStyle}
+                  PlaceholderContent={<ActivityIndicator />}
                 />
               </View>
               <View style={styles.cardView}>
@@ -82,20 +85,21 @@ class PTAScreen extends Component {
     return (
       <ScrollView style={{ marginTop: 5}}>
         <Image
-          source={{ uri: LogoURL}}
+          source={{ uri: this.props.pta.logo}}
           style={styles.logoImageStyle}
+          PlaceholderContent={<ActivityIndicator />}
         />
         {this.renderCards()}
         <View style={styles.buttonContainer}>
           <BESButton
             title="Further Information"
-            onPress={() => Linking.openURL('https://ballantynepta.weebly.com/')}
+            onPress={() => Linking.openURL(this.props.pta.links.website)}
           />
         </View>
         <View style={styles.buttonContainer}>
           <BESButton
             title="BES PTA on Facebook"
-            onPress={() => Linking.openURL('https://www.facebook.com/BallantynePTA/')}
+            onPress={() => Linking.openURL(this.props.pta.links.facebook)}
             icon={{ name: "facebook", type: "entypo" }}
           />
         </View>
@@ -148,6 +152,7 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
+  console
   return { pta: state.pta }
 }
 

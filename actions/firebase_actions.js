@@ -26,16 +26,7 @@ export const fetchPTA = () => async (dispatch) => {
   const DB = firebase.database();
   try {
     let result = await DB.ref().child('pta').once('value');
-    let payload = [];
-    result.val().map(member => {
-      let mem = {};
-      mem.title = member.title;
-      mem.name = member.name;
-      mem.email = member.email;
-      mem.committees = member.committees;
-      mem.imageURL = member.imageURL
-      payload.push(mem)
-    });
+    let payload = result.val()[0];
     return dispatch({ type: FETCH_PTA, payload });
   } catch(error) {
     console.log(error);
@@ -45,16 +36,8 @@ export const fetchPTA = () => async (dispatch) => {
 export const fetchTeachers = () => async (dispatch) => {
   const DB = firebase.database();
   try {
-    let result = await DB.ref().child('teacher').once('value');
-    let payload = [];
-    result.val().map(teacher => {
-      let t = {};
-      t.grade = teacher.grade;
-      t.firstName = teacher["first name"];
-      t.email = teacher.email;
-      t.lastName = teacher["last name"];
-      payload.push(t)
-    });
+    let result = await DB.ref().child('teachers').once('value');
+    let payload = result.val()[0];
     return dispatch({ type: FETCH_TEACHERS, payload });
   } catch(error) {
     console.log(error);

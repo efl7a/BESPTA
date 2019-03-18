@@ -3,6 +3,8 @@ import { View, Text, FlatList, ScrollView, Linking } from 'react-native';
 import { Input, Button, CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
 
+import { BESButton } from '../components/common/BESButton';
+
 class VolunteerScreen extends Component {
   state = {
     firstName: "",
@@ -13,11 +15,9 @@ class VolunteerScreen extends Component {
 
   componentDidMount() {
     let committees = [];
-    this.props.pta.map(member => {
-      member.committees.map(committee => {
+    this.props.pta.committees.map(committee => {
         committees.push({name: committee, checked: false})
       })
-    })
     committees.shift()
     this.setState({ committees })
   }
@@ -43,7 +43,7 @@ class VolunteerScreen extends Component {
   onSubmit = () => {
     const { firstName, lastName, email, committees, } = this.state;
 
-    const URL = 'mailto:ballantyneptasecretary@gmail.com';
+    const URL = `mailto:${this.props.pta.board[0].email}`;
     const committeeChoices = committees.filter(committee => committee.checked).map(committee => committee.name).join('\n');
     const subject = "App testing";
     const body = `Name: ${firstName} ${lastName} \n
@@ -56,7 +56,7 @@ class VolunteerScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1}}>
+      <View style={styles.container}>
         <View>
           <Input
             label="First Name"
@@ -77,7 +77,7 @@ class VolunteerScreen extends Component {
             autoCorrect={false}
           />
         </View>
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
           <ScrollView>
             <FlatList
               data={this.state.committees}
@@ -88,7 +88,7 @@ class VolunteerScreen extends Component {
 
         </View>
         <View>
-          <Button
+          <BESButton
             title="Submit"
             onPress={this.onSubmit}
           />
@@ -99,8 +99,15 @@ class VolunteerScreen extends Component {
   }
 }
 
+const styles = {
+  container: {
+    flex: 1,
+    padding: 10
+  }
+};
+
 const mapStateToProps = (state) => {
   return { pta: state.pta}
-}
+};
 
 export default connect(mapStateToProps)(VolunteerScreen);

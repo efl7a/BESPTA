@@ -13,7 +13,7 @@ const BESButton = (props) => {
         {props.title}
       </Text>
       {
-        props.icon ? <Icon type={props.icon.type} name={props.icon.name} size={25} color="white" /> : null
+        props.icon ? <Icon type={props.icon.type} name={props.icon.name} size={props.icon.size || 25} color="white" /> : null
       }
     </TouchableOpacity>
   )

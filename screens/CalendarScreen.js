@@ -69,7 +69,7 @@ class CalendarScreen extends Component {
 
           </View>
           <View style={{ alignItem: 'right', justifyContent: 'center'}}>
-            {link ? <BESButton icon={{ name: "chevron-right", type: "evilicon" }} title="More Information " onPress={() => Linking.openURL(event.link)} /> : null}
+            {link ? <BESButton icon={{ name: "chevron-right", type: "evilicon", size: 45 }} title="More Information" onPress={() => Linking.openURL(event.link)} /> : null}
           </View>
         </View>
 
