@@ -3,7 +3,8 @@ import { AsyncStorage } from 'react-native';
 import firebase from 'firebase';
 
 export default async () => {
-  let previousToken = await AsyncStorage.getItem('BESToken');
+  AsyncStorage.removeItem('BESToken')
+  let previousToken = await AsyncStorage.getItem('BESPTAToken');
   if (previousToken) {
     return;
   } else {
@@ -17,6 +18,6 @@ export default async () => {
     console.log(token)
     const DB = firebase.database()
     DB.ref('tokens/').push({ token })
-    AsyncStorage.setItem('BESToken', token);
+    AsyncStorage.setItem('BESPTAToken', token);
   }
 }

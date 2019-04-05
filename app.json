@@ -2,7 +2,7 @@
   "expo": {
     "name": "BES PTA",
     "slug": "BESPTA",
-    "privacy": "unlisted",
+    "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
@@ -10,7 +10,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Assets.xcassets/AppIcon.appiconset/1024.png",
+    "icon": "./assets/1024.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -24,11 +24,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "icon": "./assets/Assets.xcassets/AppIcon.appiconset/1024.png",
+      "icon": "./assets/1024.png",
       "bundleIdentifier": "com.heatherchristman.BESPTA"
     },
     "android": {
-      "icon": "./assets/android/mipmap-xxxhdpi/ic_launcher.png",
+      "icon": "./assets/1024.png",
       "package": "com.heatherchristman.BESPTA"
     }
   }

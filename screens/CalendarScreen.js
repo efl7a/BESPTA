@@ -10,6 +10,7 @@ import { BESButton } from '../components/common/BESButton';
 class CalendarScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
+      title: "BES Events",
       headerRight: (
         <Button
           title="More Info"
