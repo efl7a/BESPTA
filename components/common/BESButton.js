@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 
@@ -9,12 +9,17 @@ const BESButton = (props) => {
       style={styles.buttonStyle}
       onPress={props.onPress}
     >
-      <Text style={styles.buttonTitleText}>
-        {props.title}
-      </Text>
-      {
-        props.icon ? <Icon type={props.icon.type} name={props.icon.name} size={props.icon.size || 25} color="white" /> : null
-      }
+      <View >
+        <Text style={styles.buttonTitleText}>
+          {props.title}
+        </Text>
+      </View>
+      <View>
+        {
+          props.icon ? <Icon type={props.icon.type} name={props.icon.name} size={props.icon.size || 25} color="white" /> : null
+        }
+      </View>
+
     </TouchableOpacity>
   )
 };

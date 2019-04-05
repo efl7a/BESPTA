@@ -49,7 +49,7 @@ class PTAScreen extends Component {
               <View style={styles.cardView}>
                 {member.title === "President" ? null : this.renderCommittees(member)}
                 <BESButton
-                  title="Email"
+                  title="Email "
                   onPress={() => this.emailMember(member.email)}
                   icon={{ name: "email", type: "material" }}
                 />
