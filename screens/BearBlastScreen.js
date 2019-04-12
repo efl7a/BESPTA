@@ -38,7 +38,8 @@ const styles = {
     flex: 1,
     padding: 10,
     justifyContent: 'center',
-    alignItem: 'center'
+    alignItem: 'center',
+    backgroundColor: '#ffffff'
   },
   textStyle: {
     fontSize: 25,

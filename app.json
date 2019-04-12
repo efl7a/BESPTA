@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -27,7 +27,8 @@
       "bundleIdentifier": "com.heatherchristman.BESPTA"
     },
     "android": {
-      "package": "com.heatherchristman.BESPTA"
+      "package": "com.heatherchristman.BESPTA",
+      "permissions": ["NOTIFICATIONS"]
     }
   }
 }
